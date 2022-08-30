@@ -1,6 +1,6 @@
 'use strict';
 
-const User = (sequelize, DataTypes) => {
+const Category = (sequelize, DataTypes) => {
   const Category = sequelize.define('Category',
   {
     id:{ 
@@ -17,4 +17,4 @@ const User = (sequelize, DataTypes) => {
   return Category;
 };
 
-module.exports = User;
+module.exports = Category;
