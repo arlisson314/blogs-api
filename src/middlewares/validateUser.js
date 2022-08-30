@@ -22,7 +22,3 @@ const validation = async (req, res, next) => {
 };
 
 module.exports = { validation };
-
-// const error = new Error('Token not found');
-// error.statusCode = 401;
-// if (!token) throw error;
