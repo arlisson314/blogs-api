@@ -13,10 +13,8 @@ const { User } = require('../database/models');
     if (!user) {
       return { code: 400, data: { message: 'Invalid fields' } };
     }
-    const PAYLOAD = { email };
-
+    const PAYLOAD = { email, admin: false };
     const { JWT_SECRET } = process.env;
-
     const CONFIG = { expiresIn: '7d' };
     const token = jwt.sign(PAYLOAD, JWT_SECRET, CONFIG);
     
