@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const { User } = require('../database/models');
 
-const validation = async (req, res, next) => {
+const validationUser = async (req, res, next) => {
   // valida displayName, email e password
   const { displayName, email, password } = req.body;
   const schema = Joi.object({
@@ -21,4 +21,4 @@ const validation = async (req, res, next) => {
   next();
 };
 
-module.exports = { validation };
+module.exports = validationUser;
