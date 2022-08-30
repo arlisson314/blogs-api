@@ -3,7 +3,7 @@ const loginService = require('./LoginService');
 
 const createUser = async ({ displayName, email, password, image }) => {
   await User.create({ displayName, email, password, image });
-  const { data } = await loginService.generateToken({ email, password });
+  const { data } = await loginService.login({ email, password });
   return { code: 201, data };
 };
 

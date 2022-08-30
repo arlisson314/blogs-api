@@ -1,8 +1,8 @@
 const loginService = require('../services/LoginService');
 
-  const generateToken = async (req, res) => {
-    const { code, data } = await loginService.generateToken(req.body);
+  const login = async (req, res) => {
+    const { code, data } = await loginService.login(req.body);
     return res.status(code).json(data);
   };
 
-module.exports = { generateToken };
+module.exports = { login };
