@@ -1,7 +1,7 @@
 const express = require('express');
-const LoginController = require('./controllers/LoginController');
-const UserController = require('./controllers/UserController');
 const midd = require('./middlewares');
+const UserController = require('./controllers/UserController');
+const LoginController = require('./controllers/LoginController');
 const CategoriesController = require('./controllers/CategoriesController');
 
 const app = express();

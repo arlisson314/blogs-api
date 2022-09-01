@@ -1,6 +1,12 @@
 'use strict';
 
 module.exports = {
+  /**
+   * 
+   * @param {import('sequelize').QueryInterface} queryInterface 
+   * @param {*import('sequelize').Sequelize} Sequelize 
+   */
+
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('PostCategories',
     { 
@@ -8,17 +14,17 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        references: { model: 'BlogPosts', key: 'id'},
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        references: { model: 'BlogPosts', key: 'id'},
       },
       categoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        references: { model: 'Categories', key: 'id'},
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        references: { model: 'Categories', key: 'id'},
       }
     },{
       timestamps: false,
@@ -26,8 +32,6 @@ module.exports = {
   },
 
   down: async (queryInterface, _Sequelize) => {
-
     await queryInterface.dropTable('PostCategories');
-
   }
 };
