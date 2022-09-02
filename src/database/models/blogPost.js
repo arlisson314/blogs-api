@@ -1,4 +1,8 @@
 'use strict';
+/** 
+ * @param {import('sequelize').Sequelize} sequelize
+ * @param {import('sequelize').DataTypes} DataTypes
+ * */
 const BlogPost = (sequelize, DataTypes) => {
   const BlogPost = sequelize.define('BlogPost',
   {
@@ -14,12 +18,18 @@ const BlogPost = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
       primaryKey: true
     },
-    published: DataTypes.DATE,
-    updated:  DataTypes.DATE,
-
+    published:{ 
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updated: { 
+      type: DataTypes.DATE,
+      allowNull: false,
+    }
   }, {
-    timestamps: false,
-    tableName: 'BlogPost',
+    tableName: 'BlogPosts',
+    createdAt: 'published',
+    updatedAt: 'updated'
   });
 
   BlogPost.associate = (models) => {

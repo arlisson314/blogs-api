@@ -35,8 +35,6 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-    },{
-      timestamps: false,
     });
     return User;
   },
