@@ -1,7 +1,7 @@
 const PostService = require('../services/PostService');
 
 /** @type {import('express').RequestHandler} */
-const verifyCategory = async (req, res) => {
+const addPost = async (req, res) => {
   const verify = await PostService.verifyCategory(req.body.categoryIds);
 
   if (verify.message) return res.status(400).json(verify);
@@ -19,4 +19,10 @@ const getPost = async (_req, res) => {
   return res.status(code).json(data);
 };
 
-module.exports = { verifyCategory, getPost };
+/** @type {import('express').RequestHandler} */
+const getPostById = async (req, res) => {
+  const { code, data } = await PostService.getPostById(req.params);
+  return res.status(code).json(data);
+};
+
+module.exports = { addPost, getPost, getPostById };
