@@ -17,7 +17,7 @@ app.post('/categories', midd.authToken, midd.rescue(CategoriesController.addCate
 app.get('/categories', midd.authToken, midd.rescue(CategoriesController.getCategories));
 
 app.post('/post', midd.authToken, midd.verifyPost, midd.rescue(PostController.verifyCategory));
-
+app.get('/post', midd.authToken, midd.rescue(PostController.getPost));
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 app.use(midd.error);

@@ -1,8 +1,11 @@
 'use strict';
-/** 
- * @param {import('sequelize').Sequelize} sequelize
- * @param {import('sequelize').DataTypes} DataTypes
- * */
+
+// /** 
+//  * @param {import('sequelize').Sequelize} sequelize
+//  * @param {import('sequelize').DataTypes} DataTypes
+//  * */
+/**@type {import('sequelize').ModelAttributes} */
+
 const BlogPost = (sequelize, DataTypes) => {
   const BlogPost = sequelize.define('BlogPost',
   {
@@ -34,8 +37,8 @@ const BlogPost = (sequelize, DataTypes) => {
 
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, {
+      foreignKey: 'id',
       as: 'user',
-      foreignKey: 'id'
     });
   };
 

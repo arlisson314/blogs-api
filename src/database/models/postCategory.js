@@ -1,6 +1,9 @@
 'use strict';
+/** 
+ * @param {import('sequelize').Sequelize} sequelize
+ * @param {import('sequelize').DataTypes} DataTypes
+ * */
 const PostCategory = (sequelize, DataTypes) => {
-  /** @type {import('express').RequestHandler} */
   const PostCategory = sequelize.define('PostCategory',
   {
     postId: {
@@ -17,6 +20,7 @@ const PostCategory = (sequelize, DataTypes) => {
   });
 
   PostCategory.associate = (models) => {
+
     models.BlogPost.belongsToMany(models.Category, {
       as: 'categories',
       through: PostCategory,
@@ -30,6 +34,7 @@ const PostCategory = (sequelize, DataTypes) => {
       foreignKey: 'categoryId',
       otherKey: 'postId',
     });
+
   };
 
   return PostCategory;

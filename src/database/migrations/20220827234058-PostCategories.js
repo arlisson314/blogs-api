@@ -2,11 +2,9 @@
 
 module.exports = {
   /**
-   * 
    * @param {import('sequelize').QueryInterface} queryInterface 
    * @param {*import('sequelize').Sequelize} Sequelize 
    */
-
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('PostCategories',
     { 
