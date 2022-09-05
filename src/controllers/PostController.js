@@ -25,10 +25,17 @@ const getPostById = async (req, res) => {
 };
 
 /** @type {import('express').RequestHandler} */
-const updatePostById = async (req, res) => {
-  const { code, data } = await PostService.updatePostById({
+const updatePost = async (req, res) => {
+  const { code, data } = await PostService.updatePost({
     ...req.params, ...req.body, ...req.headers });
   return res.status(code).json(data);
 };
 
-module.exports = { addPost, getPost, getPostById, updatePostById };
+/** @type {import('express').RequestHandler} */
+const deletePost = async (req, res) => {
+  const { code, data } = await PostService.deletePost({ ...req.params, ...req.headers });
+  if (data) return res.status(code).json(data);
+  return res.status(code).end();
+};
+
+module.exports = { addPost, getPost, getPostById, updatePost, deletePost };

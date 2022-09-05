@@ -19,9 +19,8 @@ app.get('/categories', midd.authToken, midd.rescue(CategoriesController.getCateg
 app.post('/post', midd.authToken, midd.validatePost, midd.rescue(PostController.addPost));
 app.get('/post', midd.authToken, midd.rescue(PostController.getPost));
 app.get('/post/:id', midd.authToken, midd.rescue(PostController.getPostById));
-app.put('/post/:id', midd.authToken,
-// midd.verifyPost,
-midd.rescue(PostController.updatePostById));
+app.put('/post/:id', midd.authToken, midd.rescue(PostController.updatePost));
+app.delete('/post/:id', midd.authToken, midd.rescue(PostController.deletePost));
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 app.use(midd.error);

@@ -67,7 +67,7 @@ const getPostById = async ({ id }) => {
   return { code: 200, data: getById };
 };
 
-const updatePostById = async ({ id, title, content, authorization: token }) => {
+const updatePost = async ({ id, title, content, authorization: token }) => {
   if (!title || !content) {
     return { code: 400, data: { message: 'Some required fields are missing' } }; 
   }
@@ -87,4 +87,15 @@ const updatePostById = async ({ id, title, content, authorization: token }) => {
   return { code: 200, data: post };
 };
 
-module.exports = { verifyCategory, addPost, getPost, getPostById, updatePostById };
+const deletePost = async ({ id, authorization: token }) => {
+  const post = await BlogPost.findByPk(id);
+  if (!post) return { code: 404, data: { message: 'Post does not exist' } }; 
+
+  const { email } = jwt.verify(token, process.env.JWT_SECRET);
+  const user = await User.findOne({ where: { email } }); // busca o email do usuario
+  if (user.id !== post.userId) return { code: 401, data: { message: 'Unauthorized user' } };
+
+  await post.destroy();
+  return { code: 204 };
+};
+module.exports = { verifyCategory, addPost, getPost, getPostById, updatePost, deletePost };
