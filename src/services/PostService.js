@@ -66,4 +66,25 @@ const getPostById = async ({ id }) => {
   if (!getById) return { code: 404, data: { message: 'Post does not exist' } };
   return { code: 200, data: getById };
 };
-module.exports = { verifyCategory, addPost, getPost, getPostById };
+
+const updatePostById = async ({ id, title, content, authorization: token }) => {
+  if (!title || !content) {
+    return { code: 400, data: { message: 'Some required fields are missing' } }; 
+  }
+  const post = await BlogPost.findByPk(id,
+    { include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
+  await post.update({ title, content });
+
+  const { email } = jwt.verify(token, process.env.JWT_SECRET);
+  const user = await User.findOne({ where: { email } }); // busca o email do usuario
+  if (user.id !== post.userId) return { code: 401, data: { message: 'Unauthorized user' } }; 
+
+  return { code: 200, data: post };
+};
+
+module.exports = { verifyCategory, addPost, getPost, getPostById, updatePostById };

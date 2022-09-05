@@ -16,9 +16,12 @@ app.post('/user', midd.validationUser, midd.rescue(UserController.createUser));
 app.post('/categories', midd.authToken, midd.rescue(CategoriesController.addCategorie));
 app.get('/categories', midd.authToken, midd.rescue(CategoriesController.getCategories));
 
-app.post('/post', midd.authToken, midd.verifyPost, midd.rescue(PostController.addPost));
+app.post('/post', midd.authToken, midd.validatePost, midd.rescue(PostController.addPost));
 app.get('/post', midd.authToken, midd.rescue(PostController.getPost));
 app.get('/post/:id', midd.authToken, midd.rescue(PostController.getPostById));
+app.put('/post/:id', midd.authToken,
+// midd.verifyPost,
+midd.rescue(PostController.updatePostById));
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 app.use(midd.error);

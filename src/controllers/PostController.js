@@ -7,8 +7,7 @@ const addPost = async (req, res) => {
   if (verify.message) return res.status(400).json(verify);
 
   if (verify) {
-    const { code, data } = await PostService.addPost(req.body,
-      req.headers.authorization);
+    const { code, data } = await PostService.addPost(req.body, req.headers.authorization);
     return res.status(code).json(data);
   } 
 };
@@ -25,4 +24,11 @@ const getPostById = async (req, res) => {
   return res.status(code).json(data);
 };
 
-module.exports = { addPost, getPost, getPostById };
+/** @type {import('express').RequestHandler} */
+const updatePostById = async (req, res) => {
+  const { code, data } = await PostService.updatePostById({
+    ...req.params, ...req.body, ...req.headers });
+  return res.status(code).json(data);
+};
+
+module.exports = { addPost, getPost, getPostById, updatePostById };

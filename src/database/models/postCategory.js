@@ -34,7 +34,6 @@ const PostCategory = (sequelize, DataTypes) => {
       foreignKey: 'categoryId',
       otherKey: 'postId',
     });
-
   };
 
   return PostCategory;
