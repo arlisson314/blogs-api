@@ -12,6 +12,7 @@ app.post('/login', midd.rescue(LoginController.login));
 app.get('/user', midd.authToken, midd.rescue(UserController.getUsers));
 app.get('/user/:id', midd.authToken, midd.rescue(UserController.getUsersById));
 app.post('/user', midd.validationUser, midd.rescue(UserController.createUser));
+app.delete('/user/me', midd.authToken, midd.rescue(UserController.deleteUser));
 
 app.post('/categories', midd.authToken, midd.rescue(CategoriesController.addCategorie));
 app.get('/categories', midd.authToken, midd.rescue(CategoriesController.getCategories));

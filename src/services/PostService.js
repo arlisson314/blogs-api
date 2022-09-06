@@ -3,6 +3,7 @@ const { Category, User, BlogPost, PostCategory, sequelize } = require('../databa
  
 const verifyCategory = async (categoryIds) => {
   const check = await Category.findAndCountAll({ where: { id: categoryIds } });
+  console.log(check);
   if (check.count !== categoryIds.length) { 
     return { message: '"categoryIds" not found' }; 
   }
@@ -93,6 +94,7 @@ const deletePost = async ({ id, authorization: token }) => {
 
   const { email } = jwt.verify(token, process.env.JWT_SECRET);
   const user = await User.findOne({ where: { email } }); // busca o email do usuario
+  
   if (user.id !== post.userId) return { code: 401, data: { message: 'Unauthorized user' } };
 
   await post.destroy();

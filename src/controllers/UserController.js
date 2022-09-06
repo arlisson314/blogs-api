@@ -18,4 +18,10 @@ const getUsersById = async (req, res) => {
   return res.status(code).json(data);
 };
 
-module.exports = { createUser, getUsers, getUsersById };
+/** @type {import('express').RequestHandler} */
+const deleteUser = async (req, res) => {
+  const { code } = await UserService.deleteUser(req.headers);
+  return res.status(code).end();
+};
+
+module.exports = { createUser, getUsers, getUsersById, deleteUser };

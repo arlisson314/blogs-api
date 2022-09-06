@@ -9,12 +9,11 @@ const { User } = require('../database/models');
     const user = await User.findOne({
       where: { email, password }, 
     });
-
     if (!user) {
       return { code: 400, data: { message: 'Invalid fields' } };
     }
 
-    const token = tokenGenerate(email);
+    const token = tokenGenerate(email, user.id);
     
     return { code: 200, data: { token } };
   };

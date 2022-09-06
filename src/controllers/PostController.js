@@ -34,8 +34,7 @@ const updatePost = async (req, res) => {
 /** @type {import('express').RequestHandler} */
 const deletePost = async (req, res) => {
   const { code, data } = await PostService.deletePost({ ...req.params, ...req.headers });
-  if (data) return res.status(code).json(data);
-  return res.status(code).end();
+  return res.status(code).json(data);
 };
 
 module.exports = { addPost, getPost, getPostById, updatePost, deletePost };
