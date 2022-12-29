@@ -7,7 +7,7 @@ const createUser = async (req, res) => {
 };
 
 /** @type {import('express').RequestHandler} */
-const getUsers = async (req, res) => {
+const getUsers = async (_req, res) => {
   const { code, data } = await UserService.getUsers();
   return res.status(code).json(data);
 };
