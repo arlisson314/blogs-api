@@ -1,8 +1,12 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { User } = require('../database/models');
 const tokenGenerate = require('./TokenService');
 
-const createUser = async ({ displayName, email, password, image }) => {
+const createUser = async ({ displayName, email, password: passwordHash, image }) => {
+  const salt = bcrypt.genSaltSync(10);
+  const password = bcrypt.hashSync(passwordHash, salt);
+
   await User.create({ displayName, email, password, image });
   const token = tokenGenerate(email);
   return { code: 201, data: { token } };
@@ -26,10 +30,10 @@ const getUsersById = async (id) => {
 const deleteUser = async ({ authorization: token }) => {
   // const user = await User.findByPk();
   
-  const { email } = jwt.verify(token, process.env.JWT_SECRET);
-  const [user] = await User.findAll({ where: { email } });
-//  console.log(user.id);
-  await user.destroy();
+  const { id } = jwt.verify(token, process.env.JWT_SECRET);
+  // const [user] = await User.findAll({ where: { email } });
+ console.log(id);
+  // await user.destroy();
   return { code: 204 };
 };
 
